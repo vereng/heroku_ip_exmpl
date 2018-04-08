@@ -1,0 +1,315 @@
+
+
+
+
+
+
+hostIP = getIP(hostname);
+
+
+var clientIp = (this.connection.httpHeaders["x-forwarded-for"]).split(",")[0];
+
+
+from "TEST_URL_HERE" to the hostname and URI of your web server. Next, tail your access log, then execute the script directly against your web server (bypassing your proxy and/or load-balancer).  Then comment out line 5 and re-execute the test.  For the first run, you should see IP address "204.9.177.195" show up in your logs.  The second run should have your machine's IP address.
+01
+#!/usr/bin/env groovy
+02
+// setup connection
+03
+def url = new URL("http://TEST_URL_HERE/")
+04
+def connection = url.openConnection()
+05
+  connection.setRequestProperty("X-Forwarded-For","204.9.177.195")
+06
+  connection.setRequestProperty("User-Agent","benevolent-bot/blog.techstacks.com")
+07
+  
+08
+if(connection.responseCode == 200){
+09
+ println "Connection successful"
+10
+ }
+11
+else{
+12
+ println "Ouchy! Error!"
+13
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+this.body = this.req.headers['x-real-ip'];
+=============================
+var koa = require('koa');
+var app = koa();
+
+app.proxy = true;
+
+
+app.use(function *(){
+    this.body = this.request.ip; // also tried request.headers['x-forwarded-for'];
+});
+
+ app.listen(3000);
+============================
+
+function detect_city($ip) {
+        
+        $default = 'UNKNOWN';
+
+        if (!is_string($ip) || strlen($ip) < 1 || $ip == '127.0.0.1' || $ip == 'localhost')
+            $ip = '8.8.8.8';
+
+        $curlopt_useragent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)';
+        
+        $url = 'http://ipinfodb.com/ip_locator.php?ip=' . urlencode($ip);
+        $ch = curl_init();
+        
+        $curl_opt = array(
+            CURLOPT_FOLLOWLOCATION  => 1,
+            CURLOPT_HEADER      => 0,
+            CURLOPT_RETURNTRANSFER  => 1,
+            CURLOPT_USERAGENT   => $curlopt_useragent,
+            CURLOPT_URL       => $url,
+            CURLOPT_TIMEOUT         => 1,
+            CURLOPT_REFERER         => 'http://' . $_SERVER['HTTP_HOST'],
+        );
+        
+        curl_setopt_array($ch, $curl_opt);
+        
+        $content = curl_exec($ch);
+        
+        if (!is_null($curl_info)) {
+            $curl_info = curl_getinfo($ch);
+        }
+        
+        curl_close($ch);
+        
+        if ( preg_match('{<li>City : ([^<]*)</li>}i', $content, $regs) )  {
+            $city = $regs[1];
+        }
+        if ( preg_match('{<li>State/Province : ([^<]*)</li>}i', $content, $regs) )  {
+            $state = $regs[1];        }
+
+        if( $city!='' && $state!='' ){
+          $location = $city . ', ' . $state;
+          return $location;
+        }else{
+          return $default;         }}
+
+Co
+=====to translarefrm php to js==========
+
+function detect_city($ip) {
+        
+        $default = 'UNKNOWN';
+
+        if (!is_string($ip) || strlen($ip) < 1 || $ip == '127.0.0.1' || $ip == 'localhost')
+            $ip = '8.8.8.8';
+
+        $curlopt_useragent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)';
+        
+        $url = 'http://ipinfodb.com/ip_locator.php?ip=' . urlencode($ip);
+        $ch = curl_init();
+        
+        $curl_opt = array(
+            CURLOPT_FOLLOWLOCATION  => 1,
+            CURLOPT_HEADER      => 0,
+            CURLOPT_RETURNTRANSFER  => 1,
+            CURLOPT_USERAGENT   => $curlopt_useragent,
+            CURLOPT_URL       => $url,
+            CURLOPT_TIMEOUT         => 1,
+            CURLOPT_REFERER         => 'http://' . $_SERVER['HTTP_HOST'],
+        );
+        
+        curl_setopt_array($ch, $curl_opt);
+        
+        $content = curl_exec($ch);
+        
+        if (!is_null($curl_info)) {
+            $curl_info = curl_getinfo($ch);
+        }
+        
+        curl_close($ch);
+        
+        if ( preg_match('{<li>City : ([^<]*)</li>}i', $content, $regs) )  {
+            $city = $regs[1];
+        }
+        if ( preg_match('{<li>State/Province : ([^<]*)</li>}i', $content, $regs) )  {
+            $state = $regs[1];
+        }
+
+        if( $city!='' && $state!='' ){
+          $location = $city . ', ' . $state;
+          return $location;
+        }else{
+          return $default; 
+        }
+        
+}
+
+Co
+Print Export (0)
+Host Name Resolution
+
+A host name is an alias assigned to an IP node to identify it as a TCP/IP host. The host name can be up to 255 characters long and can contain alphabetic and numeric characters and the "-" and "." characters. Multiple host names can be assigned to the same host. For Windows 2000–based computers, the host name does not have to match the Windows 2000 computer name.
+
+Windows Sockets applications, such as Microsoft® Internet Explorer and the FTP utility, can use one of two values for the destination to be connected: the IP address or a host name. When the IP address is specified, name resolution is not needed. When a host name is specified, the host name must be resolved to an IP address before IP-based communication with the desired resource can begin.
+
+Host names can take various forms. The two most common forms are a nickname and a domain name. A nickname is an alias to an IP address that individual people can assign and use. A domain name is a structured name that follows Internet conventions.
+Domain Names
+
+To facilitate different organizations and their desires to have scaleable, customizable naming scheme in which to operate, the InterNIC has created and maintains a hierarchical namespace called the Domain Name System (DNS). DNS is a naming scheme that looks similar to the directory structure for files on a disk. However, instead of tracing a file from the root directory through subdirectories to its final location and its file name, a host name is traced from its final location through its parent domains back up to the root. The unique name of the host, representing its position in the hierarchy, is called its Fully Qualified Domain Name (FQDN). The top-level domain namespace is shown in Figure 1.11 with example second-level and subdomains.
+Cc958812.CNBB12(en-us,TechNet.10).gif
+
+Figure 1.11 Domain Name System
+
+The domain namespace consists of:
+
+    The root domain, representing the root of the namespace and indicated with a "" (null).
+
+    Top-level domains , those directly below the root, indicating a type of organization. On the Internet, the InterNIC is responsible for the maintenance of top-level domain names. Table 1.26 has a partial list of the Internet's top-level domain names.
+
+Table 1.26 Internet Top-Level Domain Names
+
+Domain Name
+	
+
+Meaning
+
+COM
+	
+
+Commercial organization
+
+EDU
+	
+
+Educational institution
+
+GOV
+	
+
+Government institution
+
+MIL
+	
+
+Military group
+
+NET
+	
+
+Major network support center
+
+ORG
+	
+
+Organization other than those above
+
+INT
+	
+
+International organization
+
+< country/ region code >
+	
+
+Each country/region (geographic scheme)
+
+    Second-level domains , below the top level domains, identifying a specific organization within its top-level domain. On the Internet, the InterNIC is responsible for the maintenance of second-level domain names and ensuring their uniqueness.
+
+    Subdomains of the organization, below the second-level domain. The individual organization is responsible for the creation and maintenance of subdomains.
+
+For example, for the FQDN ftpsrv.wcoast.reskit.com :
+
+    The trailing period ( . ) denotes that this is an FQDN with the name relative to the root of the domain namespace. The trailing period is usually not required for FQDNs and if it is missing it is assumed to be present.
+
+    com is the top-level domain, indicating a commercial organization.
+
+    reskit is the second-level domain, indicating the Windows 2000 Resource Kit organization.
+
+    wcoast is a subdomain of reskit.com indicating the West Coast division of the Windows 2000 Resource Kit organization.
+
+    ftpsrv is the name of the FTP server in the West Coast division.
+
+Domain names are not case sensitive.
+
+Organizations not connected to the Internet can implement whatever top and second-level domain names they want. However, typical implementations do adhere to the InterNIC specification so that eventual participation in the Internet will not require a renaming process.
+Top Of Page
+Host Name Resolution Using a Hosts File
+
+One common way to resolve a host name to an IP address is to use a locally stored database file that contains IP-address-to-host-name mappings. On most UNIX systems, this file is /etc/hosts. On Windows 2000 systems, it is the Hosts file in the \% SystemRoot %\system32\drivers\etc directory.
+
+Following is an example of the contents of the Hosts file:
+
+#
+
+# Table of IP addresses and host names
+
+#
+
+127.0.0.1 localhost
+
+139.41.34.1 router
+
+167.91.45.121 server1.central.slate.com s1
+
+Within the Hosts file:
+
+    Multiple host names can be assigned to the same IP address. Note that the server at the IP address 167.91.45.121 can be referred to by its FQDN (server1.central.slate.com) or a nickname (s1). This allows the user at this computer to refer to this server using the nickname s1 rather than typing the entire FQDN.
+
+    Entries can be case sensitive depending on the platform. Entries in the Hosts file for UNIX computers are case sensitive. Entries in the Hosts file for Windows 2000 and Windows NT–based computers are not case sensitive.
+
+The advantage of using a Hosts file is that it is customizable for the user. Each user can create whatever entries they want, including easy-to-remember nicknames for frequently accessed resources. However, the individual maintenance of the Hosts file does not scale well to storing large numbers of FQDN mappings.
+Top Of Page
+Host Name Resolution Using a DNS Server
+
+To make host name resolution scalable and centrally manageable, IP address mappings for FQDNs are stored on DNS servers , computers that stores FQDN-to-IP-address mappings. To enable the querying of a DNS server by a host computer, a component called the DNS resolver is enabled and configured with the IP address of the DNS server. The DNS resolver is a built-in component of TCP/IP protocol stacks supplied with most network operating systems, including Windows 2000.
+
+When a Windows Sockets application is given an FQDN as the destination location, the application calls a Windows Sockets function to resolve the name to an IP address. The request is passed to the DNS resolver component in the TCP/IP protocol. The DNS resolver packages the FQDN request as a DNS Name Query packet and sends it to the DNS server.
+
+DNS is a distributed naming system. Rather than storing all the records for the entire namespace on each DNS server, each DNS server only stores the records for a specific portion of the namespace. The DNS server is authoritative for the portion of the namespace that corresponds to records stored on that DNS server. In the case of the Internet, hundreds of DNS servers store various portions of the Internet namespace. To facilitate the resolution of any valid domain name by any DNS server, DNS servers are also configured with pointer records to other DNS servers.
+
+The following process outlines what happens when the DNS resolver component on a host sends a DNS query to a DNS server. This process is shown in Figure 1.12 and is simplified so that you can gain a basic understanding of the DNS resolution process.
+
+    The DNS resolver component of the DNS client formats a DNS Name Query containing the FQDN and sends it to the configured DNS server.
+
+    The DNS server checks the FQDN in the DNS Name Query against locally stored address records. If a record is found, the IP address corresponding to the requested FQDN is sent back to the client.
+
+    If the FQDN is not found, the DNS server forwards the request to a DNS server that is authoritative for the FQDN.
+
+    The authoritative DNS server returns the reply, containing the resolved IP address, back to the original DNS server.
+
+    The original DNS server sends the IP address mapping information to the client.
+
+Cc958812.CNBB13(en-us,TechNet.10).gif
+
+Figure 1.12 Resolving an FQDN Using DNS Servers
+
+To obtain the IP address of a server that is authoritative for the FQDN, DNS servers on the Internet go through an iterative process of querying multiple DNS servers until the authoritative server is found. More details about this iterative process can be found in "Introduction to DNS" in this book.
+Top Of Page
+Combining a Local Database File with DNS
+
+TCP/IP implementations, including Windows 2000, allow the use of both a local database file and a DNS server to resolve host names. When a user specifies a host name in a TCP/IP command or utility:
+
+    TCP/IP checks the local database file (the Hosts file) for a matching name.
+
+    If a matching name is not found in the local database file, the host name is packaged as a DNS Name Query and sent to the configured DNS server.
+
+Combining both methods gives the user the ability to have a local database file to resolve personalized nicknames and to use the globally distributed DNS database to resolve FQDNs.
