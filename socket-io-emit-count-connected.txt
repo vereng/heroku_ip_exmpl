@@ -1,0 +1,77 @@
+//Client:==================================
+
+<script src="http://www.xserverx.com:8080/socket.io/socket.io.js"></script>
+<script>
+    var ioUrl = 'http://www.xserverx.eu:8080';
+    var socket = io.connect(ioUrl, {
+        'reconnect': true,
+        'reconnection delay': 1500,
+        //'sync disconnect on unload': true
+    });
+
+    $('#send-button').click(function() {
+        socket.emit('message', { message: $('#message').val() });
+    });
+
+    // Event listeners
+    socket.on('connect', function() {
+        // Display socket transport type
+        // Is empty in Chrome and Firefox on Windows
+        $('#transport-type').html(socket.socket.transport.name);
+    });
+
+    socket.on('onlinechange', function(data) {
+        $('#users-online').html(data.online);
+    });
+
+    socket.on('message', function(data) {
+        $('#chat').append('<p>' + data.message + '</p>');
+    });
+
+    socket.on('error', function(data) {
+        $('#errors').html('Error: Error. ' + JSON.stringify(data));
+    });
+    socket.on('connect_failed', function(data) {
+        $('#errors').html('Error: Connect failed. ' + JSON.stringify(data));
+    });
+    socket.on('reconnect_failed', function(data) {
+        $('#errors').html('Error: Reconnect failed. ' + JSON.stringify(data));
+    })
+   //Server:=======================================
+
+var express = require('express'),
+    app = express(),
+    sio = require('socket.io');
+
+var port = 8080;
+
+var io = sio.listen(app.listen(port));
+    io.set('log level', 1); // Only show warnings and errors
+    io.set('polling duration', 10);
+    io.enable('browser client minification');
+    io.enable('browser client gzip');
+
+
+var totalOnline = 0;
+
+// Server
+io.sockets.on('connection', function(socket) {
+    socket.setMaxListeners(0);
+
+    console.log('---- New user online ----');
+    totalOnline++;
+    socket.emit('onlinechange', { online: totalOnline });
+
+    socket.on('disconnect', function() {
+        console.log('---- User disconnected ----');
+
+        totalOnline--;
+
+        socket.emit('onlinechange', { online: totalOnline });
+    });
+
+    socket.on('message', function(data) {
+        io.sockets.emit('message', { message: data.message });
+    });
+});
+consol

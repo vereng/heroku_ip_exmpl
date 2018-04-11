@@ -1,0 +1,25 @@
+{
+  "name": "iplocation",
+  "version": "1.0.0",
+  "description": "csvtotbl",
+  "main": "identify_ip.js",
+  "scripts": {
+    "test": "node identify_ip.js"
+  },
+  "keywords": [
+    "csv",
+    "table"
+  ],
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "csv": "^2.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.16.3",
+    "fs": "0.0.1-security",
+    "path": "^0.12.7",
+    "socket.io": "^2.0.4"
+  },
+  "devDependencies": {}
+}

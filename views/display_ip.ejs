@@ -1,0 +1,71 @@
+
+<!--   <!DOCTYPE html>    -->
+  <html>        
+
+ <h1> list for  table data</h1>
+ <%for (var i = 0, len = table_data.length; i < len; i++) {  %>
+<li> <%= table_data[i]%></li>
+<% };%>        
+
+
+ <div id="table_data"><%= table_data%></div>
+ <div id="number_of_columns"><%= number_of_columns%></div>
+<div id="container">
+</div>
+
+
+<style>
+  table  { border-collapse: collapse; }
+  td, th { border: 1px solid black; padding: 3px 8px; }
+  th     { text-align: left; }
+</style>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io();
+</script>
+
+
+<script>
+
+
+
+//var table_data_json   =  JSON.parse(table_data_string); 
+var number_of_columns = document.getElementById("number_of_columns").innerHTML;
+var table_data_chars    = JSON.stringify(document.getElementById("table_data").innerHTML);
+var table_data_out       = new(Array);   // []; 
+var table_data_string    = new(Array);
+table_data_string        =table_data_chars.toString().split(",");
+var length_tbl          =table_data_string.length;
+var row_index           =Number(0);
+var row_index_max        =Math.ceil(length_tbl/number_of_columns);
+
+
+function CreateArray(row_index_max) {
+  for (var i=0;i<row_index_max+1;i++) {
+     table_data_out[i] = [];
+  }
+
+  return table_data_out;
+}
+
+row_index=0;
+CreateArray(row_index_max);
+for (var i = 0; i < (length_tbl-1); i++) {
+//document.write("<br></br>r-idx" + row_index_max + "<br></br>"  + "<br></br>" +table_data_out[1][3]);
+//document.write("<br></br>"+"nmclmns"+ number_of_columns + "<br></br>" +"    "  +  table_data_out.length  +  "     ");
+if ((i>0)&(row_index<row_index_max))  {row_index=row_index+1;}
+for (var j = 0; j < number_of_columns; j++) {
+ table_data_out[row_index].push(table_data_string[(Number(i*number_of_columns)+Number(j))]);} 
+    } 
+
+var table = "<table>"; // Open Table
+for(i=0; i<table_data_out.length-1; i++)
+{ table += "<tr>"; // Open Row
+ for(j=0; j<number_of_columns; j++) {
+   table += "<td>" + table_data_out[i][j] + "</td>";} 
+ table += "</tr>";} // Close Row
+table += "</table>"; // Close Table 
+document.write(table);
+
+</script>     
+</html>

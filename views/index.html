@@ -1,0 +1,26 @@
+
+<!--   <!DOCTYPE html>    -->
+  <html>        
+
+ <h1> list for  table data</h1>
+ <%for (var i = 0, len = table_data.length; i < len; i++) {  %>
+<li> <%= table_data[i]%></li>
+<% };%>        
+
+<div id="container">
+</div>
+
+
+ <% var table = document.createElement("table");  %>
+ <%    for (var i = 0; i < table_data.length; i++) {               %>
+ <%    var row = table.insertRow();                                %>
+  <%   for (var j1 = 0; j1 < table_data[i].length; j1++) {         %>
+<%   var cell = row.insertCell();                                  %>
+<%  cell.appendChild(document.createTextNode(table_data[i][j1]));}} %>
+<%   document.write("   hi   " + table[0][0])%>                                                        
+
+
+
+
+
+
