@@ -1,0 +1,24 @@
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Explicit paths specified without -i or -o; assuming --only paths...
+# On branch master
+# Changes to be committed:
+	new file:   views/build_table.ejs
+	new file:   views/display_ip.ejs
+	new file:   views/index.html
+#
+# Untracked files:
+#	Tunnel_No_Ipsec.pkt
+#	config-git.txt
+#	get_ip_client_socket-io.txt
+#	identify_ip.js
+#	ip.js
+#	ipaddr.js
+#	node_modules/
+#	package-lock.json
+#	package.json
+#	socket-io-emit-count-connected.txt
+#	test_ipaddress.py
+#
+
