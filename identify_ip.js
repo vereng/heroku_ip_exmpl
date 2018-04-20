@@ -7,13 +7,11 @@ var path=require('path');
 var app=express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'true'}));
-	app.set('port',process.env.PORT||5050);
-
-		app.set('views',__dirname+'/views');
-		app.use(express.static(__dirname+'/public'));
-
-		app.set("view engine","ejs");
-		var io= require('socket.io').listen(http);   //('http://localhost:5050);
+app.set('port',process.env.PORT||3000);
+app.set('views',__dirname+'/views');
+app.use(express.static(__dirname+'/public'));
+app.set("view engine","ejs");
+var io= require('socket.io').listen(http);   //('http://localhost:5050);
                 
 		       io.sockets.on('connection',function(socket){
 		       var socketId=socket.id});
